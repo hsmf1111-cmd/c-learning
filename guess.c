@@ -4,16 +4,26 @@
 int main() {
 	int secret, guess;
 	int count =0;
+	int history[100];
+	
+	char name[50];
 
+	printf("Welcome to the Hacker Casino!\n");
+	printf("What is your code name?");
+	scanf("%s", name);
+	
 	srand(time(0));
 	secret = rand() % 100 +1;
 
-	printf("I have a secret number between 1 and 100.\n");
+	printf("Hello, Agent %s. I have a secret number between 1 and 100.\n", name);
+
 	printf("Let's play!\n");
 	
 	while (1) {
 		printf("Enter your guess: ");
 		scanf("%d",&guess);
+
+		history[count] = guess;
 		count = count +1;
 
 		if (guess > secret) {
@@ -21,12 +31,17 @@ int main() {
 		} else if (guess < secret) {
 			printf("Too small!\n");
 		} else {
-			printf("You win! The number is %d.\n", secret);
+			printf("Excellent work, %s! You win! The number is %d.\n", name,  secret);
 			break;
 
 		}
 	}
-	printf("You guessed %d times.Game Over!\n", count);
+	printf("You guessed %d times. Your history: ", count);
+	for (int i =0; i < count; i++) {
+		printf("%d ", history[i]);
+	}
+	printf("\nGame Over!\n");
+
 	return 0;
 
 }
